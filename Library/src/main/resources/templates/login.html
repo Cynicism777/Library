@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>管理员登录</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      background-color: #f2f2f2;
+      margin: 3.3rem;
+    }
+    .container {
+      background-color: white;
+      padding: 6rem;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 4rem;
+      font-size: 2.3rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-bottom: 0.5rem;
+    }
+    input[type="text"], input[type="password"] {
+      margin-bottom: 2rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      width: 280px;
+    }
+    input[type="submit"] {
+      cursor: pointer;
+      padding: 0.5rem;
+      background-color: #6495ED;
+      color: white;
+      border: none;
+      border-radius: 3px;
+    }
+    input[type="submit"]:hover {
+      background-color: #5252e2;
+    }
+    p {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>管理员登录</h1>
+  <form th:action="@{/admin/login}" method="post">
+    <label for="admin">用户名：</label>
+    <input type="text" id="admin" name="admin" required>
+    <label for="password">密码：</label>
+    <input type="password" id="password" name="password" required>
+    <input type="submit" value="登录">
+  </form>
+  <p th:if="${message}" th:text="${message}"></p>
+</div>
+</body>
+</html>
