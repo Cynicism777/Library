@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Book</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 80px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #6495ED;
+      font-size: 3.5rem;
+      margin-top: 0rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"], input[type="submit"] {
+      padding: 5px;
+      font-size: 20px;
+    }
+
+    input[type="submit"] {
+      background-color: #6495ED;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #5252e2;
+    }
+
+    .submit-btn {
+      text-align: center;
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .submit-btn a, .submit-btn input[type="submit"] {
+      margin-right: 10px;
+      background-color: #6495ED;
+      border: none;
+      color: white;
+      padding: 10px 60px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .submit-btn input[type="submit"] {
+      margin-right: 100px; /* 设置按钮之间的间距 */
+    }
+
+    .submit-btn input[type="submit"]:hover {
+      background-color: #5252e2;
+    }
+
+    .submit-btn a:hover, .submit-btn input[type="submit"]:hover {
+      background-color: #5252e2;
+    }
+
+    .alert {
+      width: 40%;
+      margin: 40px auto;
+      padding: 30px;
+      text-align: center;
+      font-size: 20px;
+      color: white;
+      background-color: #6495ED;
+      border-radius: 4px;
+    }
+
+    table {
+      width: 40%;
+      margin: 0 auto;
+      font-size: 1.2rem;
+    }
+
+    td {
+      padding: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>新增图书</h2>
+  <form action="#" th:action="@{/bookManage/addBook}" th:object="${book}" method="post">
+    <table>
+      <tr>
+        <td>书籍名称:</td>
+        <td><input type="text" th:field="*{bookName}" /></td>
+      </tr>
+      <tr>
+        <td>作者姓名:</td>
+        <td><input type="text" th:field="*{author}" /></td>
+      </tr>
+      <tr>
+        <td>ISBN号:</td>
+        <td><input type="text" th:field="*{isbn}" /></td>
+      </tr>
+      <tr>
+        <td>出版社:</td>
+        <td><input type="text" th:field="*{publishingHouse}" /></td>
+      </tr>
+      <tr>
+        <td>书籍类别:</td>
+        <td><input type="text" th:field="*{category}" /></td>
+      </tr>
+      <tr>
+        <td>出版年份:</td>
+        <td><input type="text" th:field="*{year}" /></td>
+      </tr>
+    </table>
+    <div class="submit-btn">
+      <input type="submit" value="确认" />
+      <a href="/bookManage" class="btn btn-default">返回</a>
+    </div>
+  </form>
+  <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
+</div>
+</body>
+</html>
