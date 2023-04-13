@@ -15,6 +15,7 @@ public class Book {
     private String publishingHouse;
     private String category;
     private Integer year;
+    private Integer status;
 
     public Integer getBookId() {
         return bookId;
@@ -70,5 +71,13 @@ public class Book {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

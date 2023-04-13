@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.ui.Model;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -99,6 +101,17 @@ public class BookController {
     @RequestMapping("/deleteBook")
     public String deleteBook(@RequestParam("bookId") int bookId, Model model) {
         bookService.deleteBook(bookId);
+        return "redirect:/bookManage/searchBook";
+    }
+
+    @PostMapping("/updateStatus")
+    public String updateStatus(@RequestParam("bookId") int bookId, @RequestParam("status") int status, RedirectAttributes redirectAttributes) {
+        int result = bookService.updateStatus(bookId, status);
+        if (result > 0) {
+            redirectAttributes.addFlashAttribute("message", "图书状态更新成功！");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "图书状态更新失败！");
+        }
         return "redirect:/bookManage/searchBook";
     }
 }

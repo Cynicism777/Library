@@ -55,5 +55,11 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(int bookId) {
         bookMapper.deleteById(bookId);
     }
+
+    // 更新图书状态
+    @Override
+    public int updateStatus(int bookId, int status) {
+        return bookMapper.updateStatus(bookId, status);
+    }
 }
 

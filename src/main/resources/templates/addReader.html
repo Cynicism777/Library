@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>添加读者</title>
+  <!-- 引入 CSS、JavaScript 等资源文件 -->
+</head>
+<body>
+<h1>添加读者</h1>
+<form action="#" th:action="@{/readerManage/addReader}" th:object="${reader}" method="post">
+  <label for="username">用户名：</label>
+  <input type="text" id="username" th:field="*{username}" required>
+  <br>
+  <label for="password">密码：</label>
+  <input type="password" id="password" th:field="*{password}" required>
+  <br>
+  <button type="submit">提交</button>
+</form>
+</body>
+</html>
