@@ -7,4 +7,5 @@ public interface ReaderService {
     boolean addReader(Reader reader);
     List<Reader> searchReaders(Reader reader);
     void deleteReader(int readerId);
+//    public boolean isUsernameExists(String username);
 }

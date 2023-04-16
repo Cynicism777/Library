@@ -76,6 +76,7 @@ public class BookController {
             model.addAttribute("message", "年份不能为空！");
             return "addBook";
         }
+        book.setStatus(1);
         // 调用 bookService 添加图书并返回处理结果
         boolean isSuccess = bookService.addBook(book);
         if (isSuccess) {

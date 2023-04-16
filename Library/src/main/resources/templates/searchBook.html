@@ -154,6 +154,7 @@
     <th>Publishing House</th>
     <th>Category</th>
     <th>Year</th>
+    <th>Status</th>
   </tr>
   </thead>
   <tbody>
@@ -165,6 +166,7 @@
     <td th:text="${book.publishingHouse}"></td>
     <td th:text="${book.category}"></td>
     <td th:text="${book.year}"></td>
+    <td th:text="${book.status}"></td>
     <td>
       <form action="#" th:action="@{/bookManage/deleteBook}" method="post" onsubmit="return confirm('Are you sure to delete this book?')">
         <input type="hidden" name="bookId" th:value="${book.bookId}" />
