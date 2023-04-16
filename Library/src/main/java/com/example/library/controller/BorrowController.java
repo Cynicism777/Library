@@ -63,10 +63,15 @@ public class BorrowController {
         if (reader == null) {
             return "redirect:/reader/readerLogin";
         }
+
         if (reader.getPenalty() == 0 && bookService.borrowBook(bookId)) {
-            redirectAttributes.addFlashAttribute("message", "借阅成功");
+            redirectAttributes.addFlashAttribute("message", "借阅成功！");
         } else {
-            redirectAttributes.addFlashAttribute("message", "借阅失败");
+            if (reader.getPenalty() == 0){
+                redirectAttributes.addFlashAttribute("message", "借阅失败：该图书已借出！");
+            }else {
+                redirectAttributes.addFlashAttribute("message", "借阅失败：请缴纳罚款！");
+            }
         }
         return "redirect:/reader/borrow";
     }
