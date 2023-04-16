@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Borrow Books</title>
+</head>
+<body>
+<h1>借阅图书</h1>
+
+<form th:action="@{/reader/borrow}" method="post">
+  <input type="text" name="bookName" placeholder="书名">
+  <input type="text" name="author" placeholder="作者">
+  <input type="text" name="isbn" placeholder="ISBN">
+  <input type="text" name="publishingHouse" placeholder="出版社">
+  <input type="text" name="category" placeholder="分类">
+  <input type="number" name="year" placeholder="年份">
+  <button type="submit">搜索图书</button>
+</form>
+
+<table>
+  <thead>
+  <tr>
+    <th>书籍编号</th>
+    <th>书籍名称</th>
+    <th>作者姓名</th>
+    <th>ISBN</th>
+    <th>出版社</th>
+    <th>分类</th>
+    <th>年份</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td th:text="${book.bookId}"></td>
+    <td th:text="${book.bookName}"></td>
+    <td th:text="${book.author}"></td>
+    <td th:text="${book.isbn}"></td>
+    <td th:text="${book.publishingHouse}"></td>
+    <td th:text="${book.category}"></td>
+    <td th:text="${book.year}"></td>
+    <td th:text="${book.status}"></td>
+    <td>
+      <form th:action="@{/reader/borrow/{bookId}(bookId=${book.bookId})}" method="post">
+        <button type="submit">借阅</button>
+      </form>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
+
+<p th:text="${message}"></p>
+</body>
+</html>
