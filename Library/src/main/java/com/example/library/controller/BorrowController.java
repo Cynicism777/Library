@@ -46,7 +46,12 @@ public class BorrowController {
     }
 
     @GetMapping("/borrow")
-    public String borrow(Model model) {
+    public String borrow(Model model, HttpSession session) {
+        Reader reader = (Reader) session.getAttribute("reader");
+        if (reader == null){
+            return "redirect:/reader/readerLogin";
+        }
+        model.addAttribute("reader",reader);
         return "borrow";
     }
 

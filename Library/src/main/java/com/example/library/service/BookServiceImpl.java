@@ -62,11 +62,6 @@ public class BookServiceImpl implements BookService {
     public Book getById(int bookId){
         return bookMapper.selectById(bookId);
     }
-
-    @Override
-    public void update(Book book){
-        book.setStatus(0);
-    }
     @Override
     public boolean borrowBook(int bookId) {
         Book book = getById(bookId);
