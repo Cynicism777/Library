@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Search Book</title>
+  <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -166,13 +167,38 @@
     <td th:text="${book.year}"></td>
     <td th:text="${book.status}"></td>
     <td>
-      <form action="#" th:action="@{/bookManage/deleteBook}" method="post" onsubmit="return confirm('Are you sure to delete this book?')">
-        <input type="hidden" name="bookId" th:value="${book.bookId}" />
-        <input type="submit" value="Delete" style="background-color: #f44336; padding: 8px; font-size: 0.8rem; margin-left: 25px;"/>
-      </form>
+      <button class="delete-btn" style="background-color: #f44336; padding: 8px; font-size: 0.8rem;" th:data-book-id="${book.bookId}" onclick="deleteBook(this)">Delete</button>
     </td>
   </tr>
   </tbody>
 </table>
+<script>
+  function deleteBook(button) {
+    const bookId = button.getAttribute('data-book-id');
+    swal({
+      title: "确定要删除此书吗？",
+      icon: "warning",
+      buttons: ["取消", "删除"],
+      dangerMode: true,
+    })
+            .then((willDelete) => {
+              if (willDelete) {
+                const form = document.createElement('form');
+                form.method = 'post';
+                form.action = '/bookManage/deleteBook';
+                form.onsubmit = function () { return confirm('Are you sure to delete this book?'); };
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'bookId';
+                input.value = bookId;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+              }
+            });
+  }
+</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
+  <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
   <meta charset="UTF-8">
   <title>Borrow Book</title>
   <style>
@@ -121,7 +122,7 @@
 
 <body>
 <h2>借阅图书</h2>
-<form action="#" th:action="@{/reader/borrow}" th:object="${book}" method="get" autocomplete="off">
+<form action="#" th:action="@{/reader/borrow}" th:object="${book}" method="post" autocomplete="off">
   <div class="input-group">
     <label>书籍编号:</label>
     <input type="text" th:field="*{bookId}" name="bookId"  class="input-text" />
@@ -184,12 +185,26 @@
     <td th:text="${book.year}"></td>
     <td th:style="${book.status == 1 ? 'color: green' : 'color: red'}" th:text="${book.status == 1 ? '可借出' : '已借出'}"></td>
     <td>
-      <form action="#" th:action="@{/reader/borrow/{bookId}(bookId=${book.bookId})}" method="post" onsubmit="return confirm('确定要借阅此书吗？')">
-        <input type="submit" value="借阅" style="background-color: #6495ED; padding: 8px; font-size: 0.8rem;"/>
-      </form>
+      <button class="borrow-btn" style="background-color: #6495ED; padding: 8px; font-size: 0.8rem;" th:data-book-id="${book.bookId}" onclick="borrowBook(this)">借阅</button>
     </td>
   </tr>
   </tbody>
 </table>
+<script>
+  function borrowBook(button) {
+    const bookId = button.getAttribute('data-book-id');
+    swal({
+      title: "确定要借阅此书吗？",
+      icon: "warning",
+      buttons: ["取消", "借阅"],
+      dangerMode: true,
+    })
+            .then((willBorrow) => {
+              if (willBorrow) {
+                window.location.href = '/reader/borrow/' + bookId;
+              }
+            });
+  }
+</script>
 </body>
 </html>

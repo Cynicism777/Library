@@ -20,10 +20,12 @@ public class BorrowController {
     private BookService bookService;
     @Autowired
     private ReaderService readerService;
+
     @GetMapping("/readerLogin")
     public String loginPage() {
         return "readerLogin";
     }
+
     @PostMapping("/readerLogin")
     public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, Model model) {
         Reader reader = readerService.validateReader(username, password);
@@ -35,6 +37,7 @@ public class BorrowController {
             return "readerLogin";
         }
     }
+
     @GetMapping("/readerDashboard")
     public String readerDashboard(Model model, HttpSession session){
         Reader reader = (Reader) session.getAttribute("reader");
@@ -42,11 +45,11 @@ public class BorrowController {
             return "redirect:/reader/readerLogin";
         }
         model.addAttribute("reader",reader);
-        return "/readerDashboard";
+        return "readerDashboard";
     }
 
     @GetMapping("/borrow")
-    public String borrow(Book book, Model model, HttpSession session) {
+    public String borrow(@ModelAttribute Book book, Model model, HttpSession session) {
         Reader reader = (Reader) session.getAttribute("reader");
         if (reader == null){
             return "redirect:/reader/readerLogin";
@@ -57,7 +60,7 @@ public class BorrowController {
         return "borrow";
     }
 
-    @PostMapping("/borrow/{bookId}")
+    @GetMapping("/borrow/{bookId}")
     public String borrowBook(@PathVariable("bookId") Integer bookId, HttpSession session, RedirectAttributes redirectAttributes) {
         Reader reader = (Reader) session.getAttribute("reader");
         if (reader == null) {
