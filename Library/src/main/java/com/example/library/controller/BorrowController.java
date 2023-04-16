@@ -46,17 +46,12 @@ public class BorrowController {
     }
 
     @GetMapping("/borrow")
-    public String borrow(Model model, HttpSession session) {
+    public String borrow(Book book, Model model, HttpSession session) {
         Reader reader = (Reader) session.getAttribute("reader");
         if (reader == null){
             return "redirect:/reader/readerLogin";
         }
         model.addAttribute("reader",reader);
-        return "borrow";
-    }
-
-    @PostMapping("/borrow")
-    public String searchBooks(Book book, Model model) {
         List<Book> books = bookService.searchBooks(book);
         model.addAttribute("books", books);
         return "borrow";
@@ -74,6 +69,15 @@ public class BorrowController {
             redirectAttributes.addFlashAttribute("message", "借阅失败");
         }
         return "redirect:/reader/borrow";
+    }
+
+    // 读者登出
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        // 从 session 中移除读者信息
+        session.removeAttribute("reader");
+        // 重定向到读者登录页面
+        return "redirect:/reader/readerLogin";
     }
 
 }
