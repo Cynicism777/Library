@@ -58,10 +58,10 @@ public class ReaderController {
             model.addAttribute("message", "密码不能为空！");
             return "addReader";
         }
-//        if (readerService.isUsernameExists(reader.getUsername())) {
-//            model.addAttribute("message", "用户名已存在！");
-//            return "addReader";
-//        }
+        if (readerService.isUsernameExists(reader.getUsername())) {
+            model.addAttribute("message", "用户名已存在！");
+            return "addReader";
+        }
         reader.setPenalty(0);
         boolean isSuccess = readerService.addReader(reader);
         if (isSuccess) {

@@ -11,7 +11,6 @@
       padding: 0;
       font-size: 1rem;
     }
-
     header {
       background-color: #6495ED;
       padding: 1rem;
@@ -54,6 +53,11 @@
       color: #007bff;
       cursor: pointer;
     }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+    }
   </style>
 </head>
 <body>
@@ -64,9 +68,17 @@
   <form th:action="@{/readerManage/searchReader}" th:object="${reader}" method="get">
     <div class="form-group">
       <label for="username">用户名</label>
-      <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="请输入用户名">
+      <div class="input-group">
+        <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="请输入用户名">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary">搜索</button>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">搜索</button>
+    <div class="button-group mt-3">
+      <button type="button" class="btn btn-secondary" onclick="window.location.href='/readerManage/searchReader'">清空</button>
+      <button type="button" class="btn btn-info" onclick="window.location.href='/readerManage'">返回</button>
+    </div>
   </form>
   <table class="table table-striped">
     <thead>
@@ -85,7 +97,7 @@
       <td th:text="${reader.password}"></td>
       <td th:text="${reader.penalty}"></td>
       <td>
-        <button class="delete-btn" th:data-reader-id="${reader.id}" onclick="deleteReader(this)">删除</button>
+        <button class="delete-btn btn btn-danger" th:data-reader-id="${reader.id}" onclick="deleteReader(this)">删除</button>
       </td>
     </tr>
     </tbody>
@@ -93,13 +105,23 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 <script>
   function deleteReader(button) {
     const readerId = button.getAttribute('data-reader-id');
-    if (confirm('确定要删除这个读者吗？')) {
-      window.location.href = '/readerManage/deleteReader?readerId=' + readerId;
-    }
+    swal({
+      title: "确定要删除这个读者吗？",
+      icon: "warning",
+      buttons: ["取消", "删除"],
+      dangerMode: true,
+    })
+            .then((willDelete) => {
+              if (willDelete) {
+                window.location.href = '/readerManage/deleteReader?readerId=' + readerId;
+              }
+            });
   }
 </script>
 </body>

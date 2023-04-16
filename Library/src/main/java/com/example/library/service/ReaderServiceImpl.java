@@ -40,11 +40,11 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     //判断读者用户名是否重复
-//    @Override
-//    public boolean isUsernameExists(String username) {
-//        Reader reader = readerMapper.findReaderByUsername(username);
-//        return reader != null;
-//    }
+    @Override
+    public boolean isUsernameExists(String username) {
+        Reader reader = readerMapper.findReaderByUsername(username);
+        return reader != null;
+    }
     // 实现删除读者的功能
     @Override
     public void deleteReader(int readerId) {
