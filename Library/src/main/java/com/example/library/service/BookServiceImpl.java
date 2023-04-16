@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import static com.baomidou.mybatisplus.extension.toolkit.Db.updateById;
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -54,6 +56,25 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBook(int bookId) {
         bookMapper.deleteById(bookId);
+    }
+
+    @Override
+    public Book getById(int bookId){
+        return bookMapper.selectById(bookId);
+    }
+
+    @Override
+    public void update(Book book){
+        book.setStatus(0);
+    }
+    @Override
+    public boolean borrowBook(int bookId) {
+        Book book = getById(bookId);
+        if (book != null && book.getStatus() == 1) {
+            book.setStatus(0);
+            return updateById(book);
+        }
+        return false;
     }
 }
 
