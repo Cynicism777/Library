@@ -58,6 +58,7 @@ public class ReaderController {
             model.addAttribute("message", "密码不能为空！");
             return "addReader";
         }
+        reader.setPenalty(0);
 
         boolean isSuccess = readerService.addReader(reader);
         if (isSuccess) {
