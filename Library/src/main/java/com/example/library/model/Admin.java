@@ -11,9 +11,7 @@ public class Admin {
     private String admin;
     private String password;
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public void setId(int id) {
         this.id = id;

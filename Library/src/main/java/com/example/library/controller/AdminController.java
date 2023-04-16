@@ -28,10 +28,10 @@ public class AdminController {
     public String login(@RequestParam("admin") String admin, @RequestParam("password") String password, HttpSession session, Model model) {
         // 调用 AdminService 验证管理员登录信息
         Admin validAdmin = adminService.validateAdmin(admin, password);
-        // 如果验证通过，将管理员信息存储在 session 中，然后重定向到图书管理页面
+        // 如果验证通过，将管理员信息存储在 session 中，然后重定向到管理员操作界面
         if (validAdmin != null) {
             session.setAttribute("admin", validAdmin);
-            return "redirect:/bookManage";
+            return "redirect:/dashboard";
         } else {
             // 如果验证失败，返回错误信息并保持在登录页面
             model.addAttribute("message", "用户名或密码错误！");

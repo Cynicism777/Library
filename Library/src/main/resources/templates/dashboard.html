@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>管理员操作界面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 1.8rem;
+    }
+
+    header {
+      background-color: #6495ED;
+      padding: 1rem;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    a {
+      background-color: #6495ED;
+      border: none;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      text-align: center;
+      display: inline-block;
+      font-size: 1.2rem;
+      margin: 1rem 2px;
+      cursor: pointer;
+    }
+
+    a:hover {
+      background-color: rgb(71, 71, 230);
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>管理员操作界面</h1>
+  <div th:if="${admin != null}">
+    <p th:text="'当前登录管理员：' + ${admin.admin} "></p>
+    <a th:href="@{/admin/logout}">登出</a>
+  </div>
+</header>
+<div class="container">
+  <a href="/bookManage">图书管理</a>
+  <a href="/readerManage">读者管理</a>
+</div>
+</body>
+</html>

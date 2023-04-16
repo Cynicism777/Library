@@ -16,6 +16,8 @@ public class Book {
     private String category;
     private Integer year;
 
+    private boolean status;
+
     public Integer getBookId() {
         return bookId;
     }
@@ -71,4 +73,8 @@ public class Book {
     public void setYear(Integer year) {
         this.year = year;
     }
+
+    public boolean isStatus() { return status; }
+
+    public void setStatus(boolean status) { this.status = status; }
 }

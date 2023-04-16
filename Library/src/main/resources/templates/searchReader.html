@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>搜索读者 Search Reader</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+    }
+
+    header {
+      background-color: #6495ED;
+      padding: 1rem;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    form {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>搜索读者</h1>
+</header>
+<div class="container">
+  <form th:action="@{/readerManage/searchReader}" th:object="${reader}" method="get">
+    <div class="form-group">
+      <label for="username">用户名</label>
+      <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="请输入用户名">
+    </div>
+    <button type="submit" class="btn btn-primary">搜索</button>
+  </form>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>用户名</th>
+      <th>密码</th>
+      <th>罚款</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reader : ${readers}">
+      <td th:text="${reader.id}"></td>
+      <td th:text="${reader.username}"></td>
+      <td th:text="${reader.password}"></td>
+      <td th:text="${reader.penalty}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

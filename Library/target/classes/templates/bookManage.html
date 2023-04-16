@@ -4,8 +4,12 @@
   <meta charset="UTF-8">
   <title>图书管理 BookManagement</title>
   <style>
+
     body {
-      font-family: Arial, sans-serif;
+    <div th:unless="${admin != null}" th:remove="tag">
+    <meta http-equiv="refresh" th:content="|0;url='/admin/login'|">
+    </div>
+    font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       font-size: 1.8rem;
