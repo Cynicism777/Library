@@ -122,7 +122,7 @@
 
 <body>
 <h2>借阅图书</h2>
-<form action="#" th:action="@{/reader/borrow}" th:object="${book}" method="post" autocomplete="off">
+<form action="#" th:action="@{/reader/borrow}" th:object="${book}" method="get" autocomplete="off">
   <div class="input-group">
     <label>书籍编号:</label>
     <input type="text" th:field="*{bookId}" name="bookId"  class="input-text" />
