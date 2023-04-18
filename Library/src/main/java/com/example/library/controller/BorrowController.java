@@ -1,6 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.model.Book;
+import com.example.library.service.BorrowService;
 import org.springframework.ui.Model;
 import com.example.library.model.Reader;
 import com.example.library.service.BookService;
@@ -20,6 +21,8 @@ public class BorrowController {
     private BookService bookService;
     @Autowired
     private ReaderService readerService;
+    @Autowired
+    private BorrowService borrowService;
 
     @GetMapping("/readerLogin")
     public String loginPage() {
@@ -67,7 +70,7 @@ public class BorrowController {
             return "redirect:/reader/readerLogin";
         }
 
-        if (reader.getPenalty() == 0 && bookService.borrowBook(bookId)) {
+        if (reader.getPenalty() == 0 && borrowService.borrowBook(bookId)) {
             redirectAttributes.addFlashAttribute("message", "借阅成功！");
         } else {
             if (reader.getPenalty() == 0){

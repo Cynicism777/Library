@@ -58,18 +58,5 @@ public class BookServiceImpl implements BookService {
         bookMapper.deleteById(bookId);
     }
 
-    @Override
-    public Book getById(int bookId){
-        return bookMapper.selectById(bookId);
-    }
-    @Override
-    public boolean borrowBook(int bookId) {
-        Book book = getById(bookId);
-        if (book != null && book.getStatus() == 1) {
-            book.setStatus(0);
-            return updateById(book);
-        }
-        return false;
-    }
 }
 
