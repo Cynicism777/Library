@@ -2,10 +2,9 @@ package com.example.library.controller;
 
 import com.example.library.model.Book;
 import com.example.library.service.BorrowService;
+import com.example.library.service.ReaderLogService;
 import org.springframework.ui.Model;
 import com.example.library.model.Reader;
-import com.example.library.service.BookService;
-import com.example.library.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +17,9 @@ import java.util.List;
 @RequestMapping("/reader")
 public class BorrowController {
     @Autowired
-    private BookService bookService;
-    @Autowired
-    private ReaderService readerService;
-    @Autowired
     private BorrowService borrowService;
+    @Autowired
+    private ReaderLogService readerLogService;
 
     @GetMapping("/readerLogin")
     public String loginPage() {
@@ -31,7 +28,7 @@ public class BorrowController {
 
     @PostMapping("/readerLogin")
     public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, Model model) {
-        Reader reader = readerService.validateReader(username, password);
+        Reader reader = readerLogService.validateReader(username, password);
         if (reader != null) {
             session.setAttribute("reader", reader);
             return "redirect:/reader/readerDashboard";
@@ -58,7 +55,7 @@ public class BorrowController {
             return "redirect:/reader/readerLogin";
         }
         model.addAttribute("reader",reader);
-        List<Book> books = bookService.searchBooks(book);
+        List<Book> books = borrowService.searchBooks(book);
         model.addAttribute("books", books);
         return "borrow";
     }

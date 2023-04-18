@@ -10,6 +10,4 @@ public interface ReaderService {
     List<Reader> searchReaders(Reader reader);
     void deleteReader(int readerId);
     public boolean isUsernameExists(String username);
-    Reader validateReader(String username, String password);
-
 }

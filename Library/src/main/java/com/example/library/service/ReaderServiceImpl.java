@@ -12,8 +12,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 public class ReaderServiceImpl implements ReaderService {
     @Autowired
     private ReaderMapper readerMapper;
-    @Autowired
-    private BookService bookService;
 
     // 实现添加读者功能，返回boolean值，成功为true
     @Override
@@ -53,11 +51,5 @@ public class ReaderServiceImpl implements ReaderService {
     public void deleteReader(int readerId) {
         readerMapper.deleteById(readerId);
     }
-
-    @Override
-    public Reader validateReader(String username, String password){
-        return readerMapper.findByUsernameAndPassword(username,password);
-    }
-
 
 }
