@@ -5,28 +5,42 @@
   <title>管理员操作界面</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       font-size: 1.8rem;
+      color: #333;
+      background-color: rgba(216, 212, 209, 0.4);
     }
 
     header {
-      background-color: #6495ED;
       padding: 1rem;
-      color: white;
+      color: #424242;
       text-align: center;
+      background-image: url('/img/texture2.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      font-family: 隶书;
+      font-size: 1.6rem;
+    }
+
+    h1{
+      font-family: 隶书;
+      font-size: 5rem;
+      color: #333333;
     }
 
     .container {
       display: flex;
-      justify-content: space-around;
-      margin-top: 2rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 3rem;
       margin-bottom: 2rem;
     }
 
     a {
-      background-color: #6495ED;
+      background-color: #7DCEA0;
       border: none;
       color: white;
       text-decoration: none;
@@ -34,26 +48,81 @@
       text-align: center;
       display: inline-block;
       font-size: 1.2rem;
-      margin: 1rem 2px;
+      margin: 1rem 8rem;
       cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease-out;
+      font-family: 隶书;
+      font-size: 1.4rem;
     }
 
     a:hover {
-      background-color: rgb(71, 71, 230);
+      background-color: #27AE60;
     }
+
+    @media only screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+
+    .quote-container {
+      background-color: rgba(125, 206, 160, 0.3);
+      border: 2px solid rgba(39, 174, 96, 0.2);
+      padding: 0rem;
+      margin: 5rem auto;
+      text-align: center;
+      width: 40%;
+      position: relative;
+      border-radius: 40px;
+    }
+
+    .quote-container p {
+      font-size: 1.5rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      font-family: 华文楷体;
+      font-size: 1.3rem;
+    }
+
+    .quote-container p:first-child {
+      margin-bottom: 0;
+    }
+
+    .quote-container p:last-child {
+      text-align: right;
+      margin-top: 0;
+      margin-right: 3rem;
+    }
+
+    .quote-container span {
+      font-size: 1.4rem;
+      font-family: 华文行楷;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+    }
+
   </style>
 </head>
 <body>
 <header>
   <h1>管理员操作界面</h1>
   <div th:if="${admin != null}">
-    <p th:text="'当前登录管理员：' + ${admin.admin} "></p>
+    <p th:text="'欢迎！管理员：' + ${admin.admin} "></p>
     <a th:href="@{/admin/logout}">登出</a>
   </div>
 </header>
 <div class="container">
   <a href="/bookManage">图书管理</a>
   <a href="/readerManage">读者管理</a>
+</div>
+<div class="quote-container">
+  <p><span>"</span>立身以立学为先，立学以读书为本。<span>"</span></p>
+  <p>———朱熹</p>
 </div>
 </body>
 </html>

@@ -20,9 +20,9 @@
 
   h2{
     text-align: center;
-    font-size: 4.2rem;
+    font-size: 5rem;
     color: #3a1919;
-    font-family: 华文琥珀;
+    font-family: 隶书;
     letter-spacing: 16px;
   }
 
@@ -42,6 +42,23 @@
     background-color: rgba(226, 230, 226, 0.8);
   }
 
+  .icon-img {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #ced4da;
+    pointer-events: none;
+    display: inline-block;
+    width: 28px; /* Set the width of the icon */
+    height: 28px; /* Set the height of the icon */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.5;
+  }
+
 
 </style>
 
@@ -52,40 +69,40 @@
   <form action="#" th:action="@{/bookManage/searchBook}" th:object="${book}" method="get" autocomplete="off">
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="bookId">书籍编号:</label>
-        <input type="text" class="form-control" th:field="*{bookId}" name="bookId" id="bookId">
+        <input type="text" class="form-control" th:field="*{bookId}" name="bookId" id="bookId" placeholder="书籍编号">
+        <span class="icon-img" style="background-image: url('/icon/id.png');"></span>
       </div>
       <div class="form-group col-md-6">
-        <label for="bookName">书籍名称:</label>
-        <input type="text" class="form-control" th:field="*{bookName}" name="bookName" id="bookName">
+        <input type="text" class="form-control" th:field="*{bookName}" name="bookName" id="bookName" placeholder="书籍名称">
+        <span class="icon-img" style="background-image: url('/icon/book.png');"></span>
       </div>
       <div class="form-group col-md-6">
-        <label for="author">作者姓名:</label>
-        <input type="text" class="form-control" th:field="*{author}" name="author" id="author">
+        <input type="text" class="form-control" th:field="*{author}" name="author" id="author" placeholder="作者姓名">
+        <span class="icon-img" style="background-image: url('/icon/author.png');"></span>
       </div>
       <div class="form-group col-md-6">
-        <label for="isbn">ISBN号:</label>
-        <input type="text" class="form-control" th:field="*{isbn}" name="isbn" id="isbn">
+        <input type="text" class="form-control" th:field="*{isbn}" name="isbn" id="isbn" placeholder="ISBN号">
+        <span class="icon-img" style="background-image: url('/icon/isbn.png');"></span>
       </div>
       <div class="form-group col-md-6">
-        <label for="publishingHouse">出版社:</label>
-        <input type="text" class="form-control" th:field="*{publishingHouse}" name="publishingHouse" id="publishingHouse">
+        <input type="text" class="form-control" th:field="*{publishingHouse}" name="publishingHouse" id="publishingHouse" placeholder="出版社">
+        <span class="icon-img" style="background-image: url('/icon/building.png');"></span>
       </div>
       <div class="form-group col-md-6">
-        <label for="category">书籍类别:</label>
-        <input type="text" class="form-control" th:value="*{category}" name="category" id="category">
+        <input type="text" class="form-control" th:value="*{category}" name="category" id="category" placeholder="书籍类别">
+        <span class="icon-img" style="background-image: url('/icon/tag.png');"></span>
       </div>
       <div class="form-group col-md-6">
-        <label for="year">出版年份:</label>
-        <input type="text" class="form-control" th:value="*{year}" name="year" id="year">
+        <input type="text" class="form-control" th:value="*{year}" name="year" id="year" placeholder="出版年份">
+        <span class="icon-img" style="background-image: url('/icon/calendar.png');"></span>
       </div>
       <div class="form-group col-md-6">
-        <label for="status">图书状态:</label>
         <select class="form-control" th:field="*{status}" name="status" id="status">
-          <option value="" selected>全部</option>
+          <option value="" selected>图书状态（默认全部）</option>
           <option value="1">可借出</option>
           <option value="0">已借出</option>
         </select>
+        <span class="icon-img" style="background-image: url('/icon/status.png');"></span>
       </div>
 
     </div>
