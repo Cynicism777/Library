@@ -3,8 +3,11 @@
 <head>
   <title>Add Book</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
-  <link rel="stylesheet" href="@{/css/all.min.css}">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/all.min.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
   <style>
     body {
       background-image: url('/img/book.jpg');
@@ -29,13 +32,11 @@
       text-align: center;
       color: #433334;
       font-size: 5rem;
-      font-family: "黑体";
-      font-weight: bold;
+      font-family: "华文琥珀";
       letter-spacing: 2rem;
       margin-top: 0rem;
       margin-left: 3rem;
       margin-bottom: 3rem;
-      /*background-color: #b1dfbb;*/
     }
 
     form {
@@ -218,9 +219,6 @@
   </form>
   <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
 </div>
-<!-- Add JavaScript Libraries -->
-<script src="@{/js/jquery.min.js}"></script>
-<script src="@{/js/popper.min.js}"></script>
-<script src="@{/js/bootstrap.min.js}"></script>
+
 </body>
 </html>

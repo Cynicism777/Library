@@ -3,19 +3,20 @@
 <head>
   <title>Add Book</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
-  <link rel="stylesheet" href="@{/css/all.min.css}">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/all.min.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
   <style>
     body {
-      background-image: url('/img/addReader.jpg');
+      background-image: url('/img/book.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      /*background-color: #f8f9fa;
-      background-image: linear-gradient(to right, #6a11cb, #2575fc);*/
 
     }
 
@@ -31,13 +32,11 @@
       text-align: center;
       color: #433334;
       font-size: 5rem;
-      font-family: "黑体";
-      font-weight: bold;
+      font-family: "华文琥珀";
       letter-spacing: 2rem;
       margin-top: 0rem;
       margin-left: 3rem;
       margin-bottom: 3rem;
-      /*background-color: #b1dfbb;*/
     }
 
     form {
@@ -134,15 +133,6 @@
       border: 1px solid #ced4da;
     }
 
-    .icon {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 20px;
-      color: #ced4da;
-      pointer-events: none;
-    }
     .icon-img {
       position: absolute;
       right: 20px;
@@ -229,29 +219,6 @@
   </form>
   <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
 </div>
-<svg style="display:none;">
-  <symbol id="icon-book" viewBox="0 0 24 24">
-    <img th:src="@{/static/icon/book.png}" alt="book">
-  </symbol>
-  <symbol id="icon-author" viewBox="0 0 24 24">
-    <img th:src="@{/static/icon/author.png}" alt="author">
-  </symbol>
-  <symbol id="icon-building" viewBox="0 0 24 24">
-    <img th:src="@{/static/icon/buiding.png}" alt="building">
-  </symbol>
-  <symbol id="icon-tag" viewBox="0 0 24 24">
-    <img th:src="@{/static/icon/tag.png}" alt="tag">
-  </symbol>
-  <symbol id="icon-isbn" viewBox="0 0 24 24">
-    <img th:src="@{/static/icon/isbn.png}" alt="isbn">
-  </symbol>
-  <symbol id="icon-calendar" viewBox="0 0 24 24">
-    <img th:src="@{/static/icon/calendar.png}" alt="calendar">
-  </symbol>
-</svg>
-<!-- Add JavaScript Libraries -->
-<script src="@{/js/jquery.min.js}"></script>
-<script src="@{/js/popper.min.js}"></script>
-<script src="@{/js/bootstrap.min.js}"></script>
+
 </body>
 </html>
