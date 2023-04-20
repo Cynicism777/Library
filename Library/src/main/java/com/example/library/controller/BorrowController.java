@@ -42,7 +42,7 @@ public class BorrowController {
     public String readerDashboard(Model model, HttpSession session){
         Reader reader = (Reader) session.getAttribute("reader");
         if (reader == null){
-            return "redirect:/reader/readerLogin";
+            return "redirect:/start";
         }
         model.addAttribute("reader",reader);
         return "readerDashboard";
@@ -52,7 +52,7 @@ public class BorrowController {
     public String borrow(@ModelAttribute Book book, Model model, HttpSession session) {
         Reader reader = (Reader) session.getAttribute("reader");
         if (reader == null){
-            return "redirect:/reader/readerLogin";
+            return "redirect:/start";
         }
         model.addAttribute("reader",reader);
         List<Book> books = borrowService.searchBooks(book);
@@ -64,7 +64,7 @@ public class BorrowController {
     public String borrowBook(@PathVariable("bookId") Integer bookId, HttpSession session, RedirectAttributes redirectAttributes) {
         Reader reader = (Reader) session.getAttribute("reader");
         if (reader == null) {
-            return "redirect:/reader/readerLogin";
+            return "redirect:/start";
         }
 
         if (reader.getPenalty() == 0 && borrowService.borrowBook(bookId)) {
@@ -85,7 +85,7 @@ public class BorrowController {
         // 从 session 中移除读者信息
         session.removeAttribute("reader");
         // 重定向到读者登录页面
-        return "redirect:/reader/readerLogin";
+        return "redirect:/start";
     }
 
 }

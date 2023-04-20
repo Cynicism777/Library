@@ -45,6 +45,6 @@ public class AdminController {
         // 从 session 中移除管理员信息
         session.removeAttribute("admin");
         // 重定向到管理员登录页面
-        return "redirect:/admin/login";
+        return "redirect:/start";
     }
 }

@@ -29,7 +29,7 @@ public class BookController {
     public void checkAdminLogin(HttpSession session, HttpServletResponse response) throws IOException {
         Admin admin = (Admin) session.getAttribute("admin");
         if (admin == null) {
-            response.sendRedirect("/admin/login");
+            response.sendRedirect("/start");
         }
     }
 
