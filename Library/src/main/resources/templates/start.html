@@ -3,11 +3,230 @@
 <head>
   <meta charset="UTF-8">
   <title>开始页面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(208, 227, 221, 0.8);
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+      width: 600px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-family: 隶书;
+      font-size: 3rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+    }
+
+    button {
+      background-color: #7DCEA0;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      width: 130px;
+      font-family: 隶书;
+      font-size: 1.1rem;
+    }
+
+    button:hover {
+      background-color: #27AE60;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+      background-color: #7DCEA0;
+      border-radius: 11px;
+      font-family: 隶书;
+    }
+
+    .features a {
+      color: #ffffff;
+      cursor: pointer;
+      position: relative;
+      padding: 15px 30px;
+      border-radius: 8px;
+    }
+
+    .features a:hover {
+      text-decoration: none;
+      background-color: rgba(39, 174, 96, 0.5);
+    }
+
+    .features a.active::before {
+      content: '👉';
+      position: absolute;
+      left: 0;
+      bottom: 1rem;
+    }
+
+    .feature-container {
+      display: none;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+    .feature-container.active {
+      display: block;
+    }
+
+    p{
+      text-indent: 2rem;
+      margin: 0;
+      font-family: 华文楷体;
+    }
+
+    .bg-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+
+    .bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      opacity: 0;
+      animation: bg-animation 25s infinite;
+    }
+
+
+    .bg-img:nth-child(1) {
+      opacity: 1;
+    }
+
+    .bg-img:nth-child(2) {
+      animation-delay: 5s;
+    }
+
+    .bg-img:nth-child(3) {
+      animation-delay: 10s;
+    }
+
+    .bg-img:nth-child(4) {
+      animation-delay: 15s;
+    }
+
+    .bg-img:nth-child(5) {
+      animation-delay: 20s;
+    }
+
+
+    @keyframes bg-animation {
+      0%, 16% {
+        opacity: 1;
+      }
+      20%, 96% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+
+
+
+
+
+
+  </style>
+  <script>
+    function showFeatureContent(id) {
+      var contents = document.querySelectorAll('.feature-container');
+      contents.forEach(function (content) {
+        content.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+
+      var links = document.querySelectorAll('.features a');
+      links.forEach(function (link) {
+        link.classList.remove('active');
+      });
+      document.querySelector('.features a[onclick="showFeatureContent(\'' + id + '\')"]').classList.add('active');
+    }
+  </script>
 </head>
 <body>
-  <h1>欢迎使用图书管理系统</h1>
-  <a href="/admin/login">管理员登录</a>
-  <br>
-  <a href="/reader/readerLogin">读者登录</a>
+<div class="bg-container">
+  <div class="bg-img" style="background-image: url('/img/lib1.jpg');"></div>
+  <div class="bg-img" style="background-image: url('/img/lib2.jpg');"></div>
+  <div class="bg-img" style="background-image: url('/img/lib3.jpg');"></div>
+  <div class="bg-img" style="background-image: url('/img/lib4.jpg');"></div>
+  <div class="bg-img" style="background-image: url('/img/lib5.jpg');"></div>
+</div>
+
+<div class="container">
+  <h1>欢迎使用图书馆系统</h1>
+  <div class="buttons">
+    <button onclick="location.href='/admin/login'">管理员登录</button>
+    <button onclick="location.href='/reader/readerLogin'">读者登录</button>
+  </div>
+</div>
+<div class="container">
+  <div class="features">
+    <a onclick="showFeatureContent('borrow')" class="active">借阅图书</a>
+    <a onclick="showFeatureContent('return')">归还图书</a>
+    <a onclick="showFeatureContent('announcement')">公告查询</a>
+    <a onclick="showFeatureContent('reservation')">座位预约</a>
+  </div>
+  <div id="borrow" class="feature-container active">
+    <p>
+      你在读者登录成功后，会进入到读者操作界面，在这里，你可以选择使用借阅图书功能。
+      进入借阅图书界面后，你可以看到一个图书搜索的界面，
+      你可以根据书籍编号、书籍名称、作者姓名、ISBN号、出版社、书籍类别、出版年份以及图书的状态搜索你感兴趣的图书。
+    </p>
+    <p>
+      找到你感兴趣的图书后，你将会在右侧看到一个 “借阅” 按钮，点击即可借阅。
+      但是在借阅前请注意检查图书状态是否为 “可借出” 以及你是否有因为归还图书不及时导致的罚款，
+      当然，我们也会对此进行检查，并告知你借阅成功与否以及详细的失败原因。
+    </p>
+  </div>
+  <div id="return" class="feature-container">
+    归还图书功能说明...
+  </div>
+  <div id="announcement" class="feature-container">
+    公告查询功能说明...
+  </div>
+  <div id="reservation" class="feature-container">
+    座位预约功能说明...
+  </div>
+</div>
+
 </body>
 </html>

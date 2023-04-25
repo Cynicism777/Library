@@ -109,6 +109,18 @@
       z-index: 1;
     }
 
+    .icon {
+      width: 45px;
+      height: auto;
+      margin-bottom: 5px;
+    }
+
+    .icon-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
   </style>
 </head>
 <body>
@@ -120,9 +132,9 @@
   </div>
 </header>
 <div class="container">
-  <a href="/bookManage/addBook">新增图书</a>
+  <a href="/bookManage/addBook" class="icon-button"><img src="/icon/addBook.png" alt="新增图书" class="icon">新增图书</a>
   <a href="/dashboard/">返回</a>
-  <a href="/bookManage/searchBook">查找图书</a>
+  <a href="/bookManage/searchBook" class="icon-button"><img src="/icon/search.png" alt="查找" class="icon">查找图书</a>
 </div>
 <div class="quote-container">
   <p><span>"</span>书籍是造就灵魂的工具。<span>"</span></p>
