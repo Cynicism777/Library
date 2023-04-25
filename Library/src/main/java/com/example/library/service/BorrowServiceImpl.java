@@ -41,6 +41,9 @@ public class BorrowServiceImpl implements BorrowService{
         if (book.getYear() != null) {
             wrapper.eq("year", book.getYear());
         }
+        if (book.getStatus() != null){
+            wrapper.eq("status",book.getStatus());
+        }
         // 使用构造好的查询条件执行查询，并返回查询结果
         return bookMapper.selectList(wrapper);
     }
