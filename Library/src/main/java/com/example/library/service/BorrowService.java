@@ -17,4 +17,7 @@ public interface BorrowService {
     List<Borrow> getBorrowedBooks(int userId);
 
     boolean returnBook(Borrow borrow);
+
+    List<Borrow> getAllBorrowRecords();
+
 }

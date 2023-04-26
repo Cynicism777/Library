@@ -93,4 +93,10 @@ public class BorrowServiceImpl implements BorrowService{
         }
         return false;
     }
+
+    @Override
+    public List<Borrow> getAllBorrowRecords() {
+        return borrowMapper.getAllBorrowRecords();
+    }
+
 }

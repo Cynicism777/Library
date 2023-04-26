@@ -17,4 +17,6 @@ public interface BorrowMapper extends BaseMapper<Borrow> {
     int updateReturnInfo(Borrow borrow);
     @Select("SELECT * FROM borrow WHERE user_id = #{userId} AND return_time IS NULL")
     List<Borrow> getBorrowedBooksByUserId(int userId);
+    @Select("SELECT * FROM borrow")
+    List<Borrow> getAllBorrowRecords();
 }

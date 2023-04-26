@@ -19,8 +19,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/bookManage")
 public class BookController {
-    @Resource
-    private BookMapper bookMapper;
     @Autowired
     private BookService bookService;
 
