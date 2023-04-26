@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Return Book</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2 class="mt-5 mb-4">Return Book</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Book ID</th>
+      <th>Book Name</th>
+      <th>Borrow Time</th>
+      <th>Return Book</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="borrow : ${borrowedBooks}">
+      <td th:text="${borrow.bookId}"></td>
+      <td th:text="${borrow.bookName}"></td>
+      <td th:text="${borrow.borrowTime}"></td>
+      <td>
+        <button class="btn btn-primary return-btn" th:data-borrow-id="${borrow.id}" th:data-book-id="${borrow.bookId}" th:data-borrow-time="${borrow.borrowTime}">Return</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $(".return-btn").on("click", function() {
+      var borrowId = $(this).data("borrow-id");
+      var bookId = $(this).data("book-id");
+      var borrowTime = $(this).data("borrow-time");
+      var formattedBorrowTime = new Date(borrowTime).toISOString();
+
+      $.ajax({
+        url: "/reader/returnBook",
+        method: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+          id: borrowId,
+          bookId: bookId,
+          borrowTime: formattedBorrowTime
+        }),
+        success: function(response) {
+          if (response) {
+            alert("Book returned successfully!");
+            location.reload();
+          } else {
+            alert("Error returning book: " + response);
+          }
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          alert("Error returning book: " + xhr.responseText);
+        }
+      });
+
+    });
+  });
+</script>
+</body>
+</html>

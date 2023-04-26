@@ -1,8 +1,13 @@
 package com.example.library.controller;
 
 import com.example.library.model.Book;
+import com.example.library.model.Borrow;
+import com.example.library.service.BookService;
 import com.example.library.service.BorrowService;
 import com.example.library.service.ReaderLogService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import com.example.library.model.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -68,6 +76,18 @@ public class BorrowController {
         }
 
         if (reader.getPenalty() == 0 && borrowService.borrowBook(bookId)) {
+            Book book = borrowService.getById(bookId);
+            Borrow borrow = new Borrow();
+            borrow.setBookId(book.getBookId());
+            borrow.setBookName(book.getBookName());
+            borrow.setUserId(reader.getId());
+            borrow.setUsername(reader.getUsername());
+            LocalDateTime now = LocalDateTime.now();
+            Date borrowTime = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
+            borrow.setBorrowTime(borrowTime);
+
+            borrowService.insertBorrowRecord(borrow);
+
             redirectAttributes.addFlashAttribute("message", "借阅成功！");
         } else {
             if (reader.getPenalty() == 0){
@@ -78,6 +98,46 @@ public class BorrowController {
         }
         return "redirect:/reader/borrow";
     }
+
+    @GetMapping("/returnBook")
+    public String returnBook(Model model, HttpSession session) {
+        Reader reader = (Reader) session.getAttribute("reader");
+        if (reader == null) {
+            return "redirect:/start";
+        }
+        List<Borrow> borrowedBooks = borrowService.getBorrowedBooks(reader.getId());
+        model.addAttribute("borrowedBooks", borrowedBooks);
+        return "returnBook";
+    }
+
+
+    /*@PostMapping("/returnBook")
+    public boolean returnBook(@RequestBody Borrow borrow) {
+        return borrowService.returnBook(borrow);
+    }*/
+
+    /*@PostMapping(value = "/returnBook", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean returnBook(@RequestBody Borrow borrow) {
+        return borrowService.returnBook(borrow);
+    }*/
+
+    @PostMapping(value = "/returnBook", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> returnBook(@RequestBody Borrow borrow) {
+        try {
+            boolean result = borrowService.returnBook(borrow);
+            if (result) {
+                return ResponseEntity.ok().body(result);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("An error occurred while returning the book.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while returning the book. Exception: " + e.getMessage());
+        }
+    }
+
+
 
     // 读者登出
     @GetMapping("/logout")
