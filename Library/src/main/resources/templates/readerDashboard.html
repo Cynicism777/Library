@@ -106,6 +106,18 @@
       z-index: 1;
     }
 
+    .icon {
+      width: 45px;
+      height: auto;
+      margin-bottom: 5px;
+    }
+
+    .icon-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
   </style>
 </head>
 <body>
@@ -117,8 +129,8 @@
   </div>
 </header>
 <div class="container">
-  <a href="/reader/borrow">借阅图书</a>
-  <a href="/reader/returnBook">归还图书</a>
+  <a href="/reader/borrow" class="icon-button"><img src="/icon/borrow.png" alt="借阅" class="icon">借阅图书</a>
+  <a href="/reader/returnBook" class="icon-button"><img src="/icon/return.png" alt="归还" class="icon">归还图书</a>
 </div>
 <div class="quote-container">
   <p><span>"</span>要知天下事，须读古人书。<span>"</span></p>
