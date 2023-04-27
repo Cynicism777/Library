@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/librarymanagement
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC
     username: root
-    password:
+    password: weiqilfl2001L
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   thymeleaf:

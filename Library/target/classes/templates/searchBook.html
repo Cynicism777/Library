@@ -1,178 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <title>Search Book</title>
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <script src="/js/jquery-3.5.1.slim.min.js"></script>
-  <script src="/js/popper.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/sweetalert.min.js"></script>
-
 </head>
-<style>
-  body{
-    background-image: url("/img/web.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  h2{
-    text-align: center;
-    font-size: 5rem;
-    color: #3a1919;
-    font-family: 隶书;
-    letter-spacing: 16px;
-  }
-
-  .d-flex button {
-    margin: 0 150px;
-  }
-
-  .custom-table {
-    background-color: rgba(197, 202, 197, 0.8);
-  }
-
-  .custom-table thead th {
-    background-color: rgba(134, 130, 96, 0.8);
-  }
-
-  .custom-table tr:nth-child(even) {
-    background-color: rgba(226, 230, 226, 0.8);
-  }
-
-  .icon-img {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: #ced4da;
-    pointer-events: none;
-    display: inline-block;
-    width: 28px; /* Set the width of the icon */
-    height: 28px; /* Set the height of the icon */
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    opacity: 0.5;
-  }
-
-
-</style>
-
 
 <body>
-<div class="container mt-4">
-  <h2>查找图书</h2>
-  <form action="#" th:action="@{/bookManage/searchBook}" th:object="${book}" method="get" autocomplete="off">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:field="*{bookId}" name="bookId" id="bookId" placeholder="书籍编号">
-        <span class="icon-img" style="background-image: url('/icon/id.png');"></span>
-      </div>
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:field="*{bookName}" name="bookName" id="bookName" placeholder="书籍名称">
-        <span class="icon-img" style="background-image: url('/icon/book.png');"></span>
-      </div>
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:field="*{author}" name="author" id="author" placeholder="作者姓名">
-        <span class="icon-img" style="background-image: url('/icon/author.png');"></span>
-      </div>
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:field="*{isbn}" name="isbn" id="isbn" placeholder="ISBN号">
-        <span class="icon-img" style="background-image: url('/icon/isbn.png');"></span>
-      </div>
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:field="*{publishingHouse}" name="publishingHouse" id="publishingHouse" placeholder="出版社">
-        <span class="icon-img" style="background-image: url('/icon/building.png');"></span>
-      </div>
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:value="*{category}" name="category" id="category" placeholder="书籍类别">
-        <span class="icon-img" style="background-image: url('/icon/tag.png');"></span>
-      </div>
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:value="*{year}" name="year" id="year" placeholder="出版年份">
-        <span class="icon-img" style="background-image: url('/icon/calendar.png');"></span>
-      </div>
-      <div class="form-group col-md-6">
-        <select class="form-control" th:field="*{status}" name="status" id="status">
-          <option value="" selected>图书状态（默认全部）</option>
-          <option value="1">可借出</option>
-          <option value="0">已借出</option>
-        </select>
-        <span class="icon-img" style="background-image: url('/icon/status.png');"></span>
-      </div>
+<h2>Search Book</h2>
+<form action="#" th:action="@{/bookManage/searchBook}" th:object="${book}" method="get">
+  <p>Book ID: <input type="text" th:field="*{bookId}" name="bookId" /></p>
+  <p>Book name: <input type="text" th:field="*{bookName}" name="bookName" /></p>
+  <p>Author: <input type="text" th:field="*{author}" name="author" /></p>
+  <p>ISBN: <input type="text" th:field="*{isbn}" name="isbn" /></p>
+  <p>Publishing house: <input type="text" th:field="*{publishingHouse}" name="publishingHouse" /></p>
+  <p>Category: <input type="text" th:field="*{category}" name="category" /></p>
+  <p>Year: <input type="text" th:field="*{year}" name="year" /></p>
+  <p><input type="submit" value="Search" /></p>
+</form>
 
-    </div>
-
-    <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary mr-2">查找</button>
-      <button type="button" class="btn btn-secondary mr-2" onclick="window.location.href='/bookManage/searchBook'">清空</button>
-      <button type="button" class="btn btn-danger" onclick="window.location.href='/bookManage'">返回</button>
-    </div>
-  </form>
-
-  <table class="table table-striped table-bordered mt-4 custom-table">
-    <thead>
-    <tr>
-      <th>Book ID</th>
-      <th>Book Name</th>
-      <th>Author</th>
-      <th>ISBN</th>
-      <th>Publishing House</th>
-      <th>Category</th>
-      <th>Year</th>
-      <th>Status</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book : ${books}">
-      <td th:text="${book.bookId}"></td>
-      <td th:text="${book.bookName}"></td>
-      <td th:text="${book.author}"></td>
-      <td th:text="${book.isbn}"></td>
-      <td th:text="${book.publishingHouse}"></td>
-      <td th:text="${book.category}"></td>
-      <td th:text="${book.year}"></td>
-      <td th:style="${book.status == 1 ? 'color: green' : 'color: red'}" th:text="${book.status == 1 ? '可借出' : '已借出'}"></td>
-      <td>
-        <button class="btn btn-danger btn-sm" th:data-book-id="${book.bookId}" onclick="deleteBook(this)">Delete</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<script>
-  function deleteBook(button) {
-    const bookId = button.getAttribute('data-book-id');
-    swal({
-      title: "确定要删除此书吗？",
-      icon: "warning",
-      buttons: ["取消", "删除"],
-      dangerMode: true,
-    })
-            .then((willDelete) => {
-              if (willDelete) {
-                const form = document.createElement('form');
-                form.method = 'post';
-                form.action = '/bookManage/deleteBook';
-                form.onsubmit = function () { return confirm('Are you sure to delete this book?'); };
-
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'bookId';
-                input.value = bookId;
-
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
-              }
-            });
-  }
-</script>
+<table>
+  <thead>
+  <tr>
+    <th>Book ID</th>
+    <th>Book Name</th>
+    <th>Author</th>
+    <th>ISBN</th>
+    <th>Publishing House</th>
+    <th>Category</th>
+    <th>Year</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td th:text="${book.bookId}"></td>
+    <td th:text="${book.bookName}"></td>
+    <td th:text="${book.author}"></td>
+    <td th:text="${book.isbn}"></td>
+    <td th:text="${book.publishingHouse}"></td>
+    <td th:text="${book.category}"></td>
+    <td th:text="${book.year}"></td>
+    <form action="#" th:action="@{/bookManage/deleteBook}" method="post" onsubmit="return confirm('Are you sure to delete this book?')">
+      <input type="hidden" name="bookId" th:value="${book.bookId}" />
+      <input type="submit" value="Delete" />
+    </form>
+    <td>
+      <form action="#" th:action="@{/bookManage/deleteBook}" method="post">
+        <input type="hidden" name="bookId" th:value="${book.bookId}" />
+        <input type="submit" value="Delete" />
+      </form>
+    </td>
+  </tr>
+  </tbody>
+  <div id="alert" th:if="${param.message}">
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      alert([[${param.message}]]); // 弹出提示框
+      /*]]>*/
+    </script>
+  </div>
+</table>
 </body>
-</html>
 
+</html>
