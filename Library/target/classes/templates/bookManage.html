@@ -2,11 +2,143 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Book Management</title>
+  <title>图书管理 BookManagement</title>
+  <style>
+
+    body {
+    <div th:unless="${admin != null}" th:remove="tag">
+    <meta http-equiv="refresh" th:content="|0;url='/admin/login'|">
+    </div>
+    font-family: Arial, sans-serif;
+      font-size: 1.8rem;
+      color: #333;
+      background-color: rgba(216, 212, 209, 0.4);
+    }
+
+    header {
+      padding: 1rem;
+      color: #424242;
+      text-align: center;
+      background-image: url('/img/texture2.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      font-family: 隶书;
+      font-size: 1.6rem;
+    }
+
+    h1{
+      font-family: 隶书;
+      font-size: 5rem;
+      color: #333333;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    a {
+      background-color: #7DCEA0;
+      border: none;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      text-align: center;
+      display: inline-block;
+      font-size: 1.2rem;
+      margin: 1rem 8rem;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease-out;
+      font-family: 隶书;
+      font-size: 1.4rem;
+    }
+
+    a:hover {
+      background-color: #27AE60;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+
+    .quote-container {
+      background-color: rgba(125, 206, 160, 0.3);
+      border: 2px solid rgba(39, 174, 96, 0.2);
+      padding: 0rem;
+      margin: 5rem auto;
+      text-align: center;
+      width: 40%;
+      position: relative;
+      border-radius: 40px;
+    }
+
+    .quote-container p {
+      font-size: 1.5rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      font-family: 华文楷体;
+      font-size: 1.3rem;
+    }
+
+    .quote-container p:first-child {
+      margin-bottom: 0;
+    }
+
+    .quote-container p:last-child {
+      text-align: right;
+      margin-top: 0;
+      margin-right: 3rem;
+    }
+
+    .quote-container span {
+      font-size: 1.4rem;
+      font-family: 华文行楷;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+    }
+
+    .icon {
+      width: 45px;
+      height: auto;
+      margin-bottom: 5px;
+    }
+
+    .icon-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+  </style>
 </head>
 <body>
-<h1>Book Management</h1>
-<a href="/bookManage/addBook">Add Book</a>
-<a href="/bookManage/searchBook">Search Book</a>
+<header>
+  <h1>图书管理</h1>
+  <div th:if="${admin != null}">
+    <p th:text="'当前登录管理员：' + ${admin.admin} "></p>
+    <a th:href="@{/admin/logout}">登出</a>
+  </div>
+</header>
+<div class="container">
+  <a href="/bookManage/addBook" class="icon-button"><img src="/icon/addBook.png" alt="新增图书" class="icon">新增图书</a>
+  <a href="/dashboard/">返回</a>
+  <a href="/bookManage/searchBook" class="icon-button"><img src="/icon/search.png" alt="查找" class="icon">查找图书</a>
+</div>
+<div class="quote-container">
+  <p><span>"</span>书籍是造就灵魂的工具。<span>"</span></p>
+  <p>———雨果</p>
+</div>
 </body>
 </html>

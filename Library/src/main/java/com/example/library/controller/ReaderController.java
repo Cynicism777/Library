@@ -82,9 +82,11 @@ public class ReaderController {
     }
 
     // 处理删除读者请求
+// 处理删除读者请求
     @RequestMapping("/deleteReader")
     public String deleteReader(@RequestParam("readerId") int readerId, Model model) {
         readerService.deleteReader(readerId);
         return "redirect:/readerManage/searchReader";
     }
+
 }
