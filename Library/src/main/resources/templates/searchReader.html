@@ -61,8 +61,8 @@
   <h2>搜索读者</h2>
   <form action="#" th:action="@{/readerManage/searchReader}" th:object="${reader}" method="get" autocomplete="off">
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" th:field="*{username}" name="username" id="username" placeholder="用户名">
+      <div class="form-group col-md-6 justify-content-center">
+        <input type="text" class="form-control" th:field="*{username}" name="username" id="username" placeholder="用户名" >
         <span class="icon-img" style="background-image: url('/icon/user.png');"></span>
       </div>
     </div>

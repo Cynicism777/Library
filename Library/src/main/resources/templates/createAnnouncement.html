@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>创建公告</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .header {
+      background: #35424a;
+      color: #ffffff;
+      padding: 1rem;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      display: inline-block;
+      border: none;
+      background: #333;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #17a2b8;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>创建公告</h1>
+  </div>
+  <div class="form-container">
+    <form action="#" th:action="@{/createAnnouncement}" th:object="${announcement}" method="post">
+      <div class="form-group">
+        <label for="title">公告标题</label>
+        <input type="text" id="title" th:field="*{title}" placeholder="请输入公告标题">
+      </div>
+      <div class="form-group">
+        <label for="content">公告内容</label>
+        <textarea id="content" th:field="*{content}" rows="10" placeholder="请输入公告内容"></textarea>
+      </div>
+      <button type="submit">创建公告</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
