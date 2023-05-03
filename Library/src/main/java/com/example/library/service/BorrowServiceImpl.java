@@ -82,6 +82,7 @@ public class BorrowServiceImpl implements BorrowService{
         Date now = new Date();
         long days = (now.getTime() - borrow.getBorrowTime().getTime()) / (1000 * 60 * 60 * 24);
         int penalty = days > 3 ? (int)(days - 3) : 0;
+        penalty += borrow.getPenalty();
         borrow.setReturnTime(now);
         borrow.setPenalty(penalty);
         int result = borrowMapper.updateReturnInfo(borrow);
