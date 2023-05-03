@@ -3,14 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>公告</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <style>
+        h2 {
+            text-align: center;
+            font-size: 5rem;
+            color: #3a1919;
+            font-family: 隶书;
+            letter-spacing: 16px;
+            margin: 2rem 0 1rem 0;
+        }
+        body {
+            background-image: url("/img/announcements.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2 class="my-4">公告</h2>
+<div class="container" style="background-color: rgba(255,255,255,0.5); border-radius: 6px;">
+    <h2>阅读公告</h2>
+    <div class="d-flex justify-content-center" style="margin-bottom: 2rem;">
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/reader/readerDashboard'">返回</button>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
