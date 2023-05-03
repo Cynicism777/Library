@@ -43,7 +43,7 @@
       <td th:text="${borrow.bookName}"></td>
       <td th:text="${borrow.borrowTime}"></td>
       <td>
-        <button class="btn btn-success return-btn" th:data-borrow-id="${borrow.id}" th:data-book-id="${borrow.bookId}" th:data-borrow-time="${borrow.borrowTime}">还书</button>
+        <button class="btn btn-success return-btn" th:data-borrow-id="${borrow.id}" th:data-book-id="${borrow.bookId}" th:data-user-id="${borrow.userId}" th:data-borrow-time="${borrow.borrowTime}">还书</button>
       </td>
     </tr>
     </tbody>
@@ -55,6 +55,7 @@
     $(".return-btn").on("click", function() {
       var borrowId = $(this).data("borrow-id");
       var bookId = $(this).data("book-id");
+      var userId = $(this).data("user-id");
       var borrowTime = $(this).data("borrow-time");
       var formattedBorrowTime = new Date(borrowTime).toISOString();
 
@@ -66,6 +67,7 @@
         data: JSON.stringify({
           id: borrowId,
           bookId: bookId,
+          userId: userId,
           borrowTime: formattedBorrowTime
         }),
         success: function(response) {

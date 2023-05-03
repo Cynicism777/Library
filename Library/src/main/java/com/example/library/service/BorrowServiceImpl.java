@@ -2,9 +2,11 @@ package com.example.library.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.library.mapper.BorrowMapper;
+import com.example.library.mapper.ReaderMapper;
 import com.example.library.model.Book;
 import com.example.library.mapper.BookMapper;
 import com.example.library.model.Borrow;
+import com.example.library.model.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class BorrowServiceImpl implements BorrowService{
     private BookMapper bookMapper;
     @Autowired
     private BorrowMapper borrowMapper;
+
+    @Autowired
+    private ReaderMapper readerMapper;
 
     // 实现查询图书功能，根据输入的对象的属性值构造查询条件
     @Override
@@ -82,15 +87,21 @@ public class BorrowServiceImpl implements BorrowService{
         Date now = new Date();
         long days = (now.getTime() - borrow.getBorrowTime().getTime()) / (1000 * 60 * 60 * 24);
         int penalty = days > 3 ? (int)(days - 3) : 0;
-        penalty += borrow.getPenalty();
         borrow.setReturnTime(now);
         borrow.setPenalty(penalty);
         int result = borrowMapper.updateReturnInfo(borrow);
         Book book = getById(borrow.getBookId());
+        Reader reader = readerMapper.getByUserId(borrow.getUserId());
+        boolean readerUpdateResult = false;
+        if (reader != null){
+            penalty += reader.getPenalty();
+            reader.setPenalty(penalty);
+            readerUpdateResult = updateById(reader);
+        }
         if (book != null) {
             book.setStatus(1);
             boolean bookUpdateResult = updateById(book);
-            return result > 0 && bookUpdateResult;
+            return result > 0 && bookUpdateResult && readerUpdateResult;
         }
         return false;
     }

@@ -11,6 +11,8 @@ import org.apache.ibatis.annotations.Select;
 public interface ReaderMapper extends BaseMapper<Reader> {
     @Select("SELECT * FROM reader WHERE username = #{username}")
     Reader findReaderByUsername(String username);
+    @Select("SELECT * FROM reader WHERE id = #{Id}")
+    Reader getByUserId(Integer id);
     @Select("SELECT * FROM reader WHERE username = #{username} AND password = #{password}")
     Reader findByUsernameAndPassword(@Param("username") String admin, @Param("password") String password);
 }
